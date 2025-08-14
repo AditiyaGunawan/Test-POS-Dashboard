@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Point of Sales</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .sidebar {
+            background-color: #1f2937;
+            color: #d1d5db;
+        }
+        .sidebar a {
+            padding: 1rem;
+            display: block;
+            border-radius: 0.5rem;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .sidebar a:hover {
+            background-color: #374151;
+            color: #f9fafb;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+
+    <!-- Sidebar -->
+    <aside class="sidebar w-64 p-4 space-y-4">
+        <h1 class="text-2xl font-bold text-white mb-6">POS App</h1>
+        <nav class="space-y-2">
+            <a href="#" class="tab-link active-link" data-tab="dashboard">Dashboard</a>
+            <a href="#" class="tab-link" data-tab="penjualan">Penjualan</a>
+            <a href="#" class="tab-link" data-tab="pembelian">Pembelian</a>
+            <a href="#" class="tab-link" data-tab="barang-masuk">Barang Masuk</a>
+            <a href="#" class="tab-link" data-tab="invoicing">Invoicing</a>
+            <a href="#" class="tab-link" data-tab="ar">AR</a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-8">
+        <!-- Dashboard -->
+        <div id="dashboard" class="tab-content active">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">Dashboard</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card Penjualan Harian -->
+                <div class="card p-6">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Penjualan Harian</h3>
+                    <p class="text-4xl font-bold text-gray-900">Rp 5.000.000</p>
+                    <p class="text-sm text-gray-500 mt-1">+12% dari kemarin</p>
+                </div>
+                <!-- Card Stok Barang -->
+                <div class="card p-6">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Stok Barang</h3>
+                    <p class="text-4xl font-bold text-gray-900">250 Item</p>
+                    <p class="text-sm text-gray-500 mt-1">5 item di bawah stok minimum</p>
+                </div>
+                <!-- Card Piutang (AR) -->
+                <div class="card p-6">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Piutang</h3>
+                    <p class="text-4xl font-bold text-gray-900">Rp 12.500.000</p>
+                    <p class="text-sm text-gray-500 mt-1">2 invoice jatuh tempo</p>
+                </div>
+            </div>
+            <!-- Bagian Grafik (Placeholder) -->
+            <div class="card p-6 mt-6">
+                <h3 class="text-xl font-semibold text-gray-700 mb-4">Grafik Penjualan Bulanan</h3>
+                <div class="bg-gray-100 h-64 flex items-center justify-center rounded-lg">
+                    <p class="text-gray-500">Placeholder untuk grafik</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Penjualan -->
+        <div id="penjualan" class="tab-content">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">Pencatatan Penjualan</h2>
+            <div class="card p-6">
+                <form id="form-penjualan" class="space-y-4">
+                    <div>
+                        <label for="produk-penjualan" class="block text-gray-700">Nama Produk</label>
+                        <input type="text" id="produk-penjualan" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    </div>
+                    <div>
+                        <label for="jumlah-penjualan" class="block text-gray-700">Jumlah</label>
+                        <input type="number" id="jumlah-penjualan" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    </div>
+                    <div>
+                        <label for="harga-penjualan" class="block text-gray-700">Harga</label>
+                        <input type="number" id="harga-penjualan" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    </div>
+                    <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition">Tambahkan Penjualan</button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Pembelian -->
+        <div id="pembelian" class="tab-content">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">Pencatatan Pembelian</h2>
+            <div class="card p-6">
+                <form id="form-pembelian" class="space-y-4">
+                    <div>
+                        <label for="produk-pembelian" class="block text-gray-700">Nama Produk</label>
+                        <input type="text" id="produk-pembelian" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    </div>
+                    <div>
+                        <label for="jumlah-pembelian" class="block text-gray-700">Jumlah</label>
+                        <input type="number" id="jumlah-pembelian" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    </div>
+                    <div>
+                        <label for="harga-pembelian" class="block text-gray-700">Harga</label>
+                        <input type="number" id="harga-pembelian" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    </div>
+                    <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition">Tambahkan Pembelian</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Barang Masuk -->
+        <div id="barang-masuk" class="tab-content">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">Pencatatan Barang Masuk</h2>
+            <div class="card p-6">
+                <form id="form-barang-masuk" class="space-y-4">
+                    <div>
+                        <label for="produk-masuk" class="block text-gray-700">Nama Produk</label>
+                        <input type="text" id="produk-masuk" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    </div>
+                    <div>
+                        <label for="jumlah-masuk" class="block text-gray-700">Jumlah</label>
+                        <input type="number" id="jumlah-masuk" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    </div>
+                    <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition">Tambahkan Barang Masuk</button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Invoicing -->
+        <div id="invoicing" class="tab-content">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">Invoicing</h2>
+            <div class="card p-6">
+                <p>Fitur invoicing akan dikembangkan di sini.</p>
+            </div>
+        </div>
+
+        <!-- AR (Account Receivable) -->
+        <div id="ar" class="tab-content">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">Pencatatan Piutang (AR)</h2>
+            <div class="card p-6">
+                <p>Fitur pencatatan piutang akan dikembangkan di sini.</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabLinks = document.querySelectorAll('.tab-link');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Hapus kelas 'active' dari semua tab-content
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // Hapus kelas 'active-link' dari semua tab-link
+                    tabLinks.forEach(item => {
+                        item.classList.remove('active-link');
+                        item.classList.remove('bg-gray-800');
+                        item.classList.add('hover:bg-gray-700');
+                    });
+                    
+                    // Tambahkan kelas 'active-link' ke link yang diklik
+                    e.currentTarget.classList.add('active-link');
+                    e.currentTarget.classList.add('bg-gray-800');
+                    e.currentTarget.classList.remove('hover:bg-gray-700');
+                    
+                    // Tampilkan tab-content yang sesuai
+                    const tabId = e.currentTarget.dataset.tab;
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Atur gaya untuk link yang aktif saat pertama kali dimuat
+            const activeLink = document.querySelector('.active-link');
+            if (activeLink) {
+                activeLink.classList.add('bg-gray-800');
+                activeLink.classList.remove('hover:bg-gray-700');
+            }
+        });
+    </script>
+</body>
+</html>
